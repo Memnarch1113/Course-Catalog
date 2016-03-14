@@ -47,3 +47,7 @@ end
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'json'
+gem 'clearance'
+gem 'pry-byebug'
+gem 'better_errors'
+gem 'minitest-rails'

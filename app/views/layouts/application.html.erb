@@ -12,6 +12,13 @@
   <div class="row">
     <div class="col-xs-3">
       <h3>Course Catalog</h3>
+      <div id="header">
+        <% if signed_in? %>
+          <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+        <% else %>
+          <%= link_to t(".sign_in"), sign_in_path %>
+        <% end %>
+      </div>
       <%= link_to "Home", root_path %>
       <%= link_to "Subjects", subjects_path %>
       <%= link_to "Courses", courses_path %>
