@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314164634) do
+ActiveRecord::Schema.define(version: 20160318030742) do
 
   create_table "courses", force: :cascade do |t|
     t.integer  "term"
     t.string   "code"
-    t.string   "subjects"
     t.integer  "continuity_id"
     t.string   "name"
     t.string   "description"
@@ -26,6 +25,27 @@ ActiveRecord::Schema.define(version: 20160314164634) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "courses_subjects", id: false, force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "subject_id"
+    t.integer  "segment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "courses_subjects", ["course_id"], name: "index_courses_subjects_on_course_id"
+  add_index "courses_subjects", ["subject_id"], name: "index_courses_subjects_on_subject_id"
+
+  create_table "courses_users", id: false, force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "courses_users", ["course_id"], name: "index_courses_users_on_course_id"
+  add_index "courses_users", ["user_id"], name: "index_courses_users_on_user_id"
 
   create_table "instructors", force: :cascade do |t|
     t.string   "email"
@@ -37,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160314164634) do
   end
 
   create_table "subjects", force: :cascade do |t|
+    t.string   "subject_id"
     t.integer  "term"
     t.string   "name"
     t.string   "abbreviation"

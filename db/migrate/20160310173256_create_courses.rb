@@ -3,7 +3,6 @@ class CreateCourses < ActiveRecord::Migration
     create_table :courses do |t|
       t.integer :term
       t.string :code
-      t.string :subjects
       t.integer :continuity_id
       t.string :name
       t.string :description

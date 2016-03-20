@@ -19,28 +19,34 @@ subjects = JSON.parse File.read(subject_file)
 subjects.each do |subject|
   Subject.create(
     term: subject["term"].to_i,
+    subject_id: subject["id"],
     name: subject["name"],
     abbreviation: subject["abbreviation"]
   )
 end
 
 courses = JSON.parse File.read(course_file)
-courses.each do |course|
-  Course.create(
+courses[0..3].each do |course|  #THIS SHOULD BE courses.each
+  c = Course.create(
     term: course["term"].to_i,
     code: course["code"],
-    #subjects
     continuity_id: course["continuity_id"].to_i,
     name: course["name"],
     description: course["description"],
     credits: course["credits"].to_i,
     #independent_study: course["independent_study"]
     requirements: course["requirements"]
+
   )
+  course["subjects"].each do |subject|
+    # puts subject["id"]
+    # puts ("find subject?: " + (Subject.find_by_subject_id subject["id"]).to_s)
+    c.subjects << (Subject.find_by_subject_id subject["id"])
+  end
 end
 
 instructors = JSON.parse File.read(instructor_file)
-instructors.each do |instructor|
+instructors[0..3].each do |instructor| #THIS SHOULD BE courses.each
   Instructor.create(
     email: instructor["email"],
     first: instructor["first"],
