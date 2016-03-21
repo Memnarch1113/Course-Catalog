@@ -1,0 +1,11 @@
+<h1>Search#results</h1>
+<p>Find me in app/views/search/results.html.erb</p>
+<table class="table">
+  <% @courses.each do |course| %>
+  <tr>
+    <td>
+      <%= course.name%>
+    </td>
+  </tr>
+  <% end %>
+</table>
