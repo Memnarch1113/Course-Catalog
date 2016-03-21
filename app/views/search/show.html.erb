@@ -2,10 +2,9 @@
 <p>Find me in app/views/search/show.html.erb</p>
 <%= form_tag("/search/results", method: "get") do %>
   <%= label_tag(:subject, "Subject:") %>
-  <%= select(:subject, :subject_id, options_from_collection_for_select(Subject.all, :subject_id, :name))%>
-
-  <%= label_tag(:q, "Course Name:") %>
-  <%= text_field_tag(:q) %>
+  <%= select(:subject, :subject_id, options_from_collection_for_select(Subject.all, :subject_id, :name), :include_blank => 'NONE')%>
+  <%= label_tag(:course_name, "Course Name:") %>
+  <%= text_field_tag(:course_name) %>
   <%= submit_tag("Search") %>
 
 
