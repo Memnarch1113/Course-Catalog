@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "clearance/users#new", as: "sign_up"
   get 'homepage/index'
-
+  get 'homepage_url' => 'homepage/index'
+  post '/courses/enrole'
   resources :subjects
   resources :instructors
   resources :courses

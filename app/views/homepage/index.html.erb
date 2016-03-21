@@ -1,2 +1,16 @@
-<h1>Homepage#index</h1>
-<p>Find me in app/views/homepage/index.html.erb</p>
+<h1>Homepage</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%@enrolements.each do |enroled|%>
+    <tr>
+      <td><%=(Course.find_by_id enroled.course_id).name%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>

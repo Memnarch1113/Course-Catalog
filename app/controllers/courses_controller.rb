@@ -8,6 +8,11 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
+  def enrole
+    current_user.courses << (Course.find_by_id params[:course_id])
+    redirect_to :controller => 'homepage', :action => 'index'
+  end
+
   # GET /courses/1
   # GET /courses/1.json
   def show

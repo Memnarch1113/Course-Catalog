@@ -1,0 +1,2 @@
+class EnrolementController < ApplicationController
+end
