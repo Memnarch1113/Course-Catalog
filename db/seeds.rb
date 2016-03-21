@@ -9,6 +9,7 @@
 Subject.delete_all
 Course.delete_all
 Instructor.delete_all
+Enrolement.delete_all
 
 subject_file = (Rails.root.to_s + '/vendor/assets/json/subject.json')
 course_file = (Rails.root.to_s + '/vendor/assets/json/course.json')
@@ -26,7 +27,7 @@ subjects.each do |subject|
 end
 
 courses = JSON.parse File.read(course_file)
-courses[0..3].each do |course|  #THIS SHOULD BE courses.each
+courses.each do |course|  #THIS SHOULD BE courses.each
   c = Course.create(
     term: course["term"].to_i,
     code: course["code"],
@@ -41,12 +42,15 @@ courses[0..3].each do |course|  #THIS SHOULD BE courses.each
   course["subjects"].each do |subject|
     # puts subject["id"]
     # puts ("find subject?: " + (Subject.find_by_subject_id subject["id"]).to_s)
-    c.subjects << (Subject.find_by_subject_id subject["id"])
+    to_save = Subject.find_by_subject_id subject["id"]
+    if to_save.class == Subject
+      c.subjects << to_save
+    end
   end
 end
 
 instructors = JSON.parse File.read(instructor_file)
-instructors[0..3].each do |instructor| #THIS SHOULD BE courses.each
+instructors.each do |instructor| #THIS SHOULD BE courses.each
   Instructor.create(
     email: instructor["email"],
     first: instructor["first"],
