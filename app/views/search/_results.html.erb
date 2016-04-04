@@ -1,0 +1,13 @@
+<div id="results">
+  <h1><%=@additional%></h1>
+  <table class="table">
+    <% @courses.each do |course| %>
+    <tr>
+      <td>
+        <%= course.name%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+</div>

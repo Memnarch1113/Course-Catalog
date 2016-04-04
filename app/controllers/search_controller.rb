@@ -25,5 +25,8 @@ class SearchController < ApplicationController
     if @courses != []
       @additional = "Search Results"
     end
+    respond_to do |format|
+      format.js
+    end
   end
 end

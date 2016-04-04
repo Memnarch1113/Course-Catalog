@@ -1,11 +1,23 @@
-<h1>Search#show</h1>
-<p>Find me in app/views/search/show.html.erb</p>
-<%= form_tag("/search/results", method: "get") do %>
-  <%= label_tag(:subject, "Subject:") %>
-  <%= select(:subject, :subject_id, options_from_collection_for_select(Subject.all, :subject_id, :name), :include_blank => 'NONE')%>
-  <%= label_tag(:course_name, "Course Name:") %>
-  <%= text_field_tag(:course_name) %>
-  <%= submit_tag("Search") %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Search</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
 
-
-<% end %>
+      <%= form_tag("/search/results", remote: true, method: "get", :html=>{:id=>'lead_form'}) do %>
+        <%= label_tag(:subject, "Subject:") %>
+        <%= select(:subject, :subject_id, options_from_collection_for_select(Subject.all, :subject_id, :name), {:include_blank => 'NONE'}, :onchange => '$("#button-submit").click();') %>
+        <%= label_tag(:course_name, "Course Name:") %>
+        <%= text_field_tag :course_name, params["Course Name"], onkeyup: '$("#button-submit").click();' %>
+        <%= submit_tag"Search", :id =>"button-submit" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12"id="results">
+    </div>
+  </div>
+</div>
